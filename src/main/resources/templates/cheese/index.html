@@ -8,24 +8,27 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
+<p th:unless="${cheeses} and ${cheeses.size()}">No cheeses found</p>
 
 
-<table class="table">
+<table th:if="${cheeses} and ${cheeses.size()}"  class="table">
 
     <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Type</th>
+        <th>Category</th>
+        <th>&nbsp;</th>
     </tr>
 
     <tr th:each="cheese : ${cheeses}">
         <td th:text="${cheese.name}"></td>
         <td th:text="${cheese.description}"></td>
-        <td th:text="${cheese.type.name}"></td>
+        <td th:text="${cheese.category.name}"></td>
+        <td><a th:href="@{|/cheese/edit/${cheese.id}|}">Edit</a></td>
     </tr>
 
 </table>
 
+<nav><a href="/cheese/add">Add Cheese</a> | <a href="/cheese/remove">Remove Cheese</a></nav>
 </body>
 </html>
